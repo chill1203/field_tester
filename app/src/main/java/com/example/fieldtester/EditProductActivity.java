@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 
 public class EditProductActivity extends Activity {
 
@@ -25,6 +26,7 @@ public class EditProductActivity extends Activity {
 	EditText txtPrice;
 	EditText txtDesc;
 	EditText txtCreatedAt;
+	RatingBar ratingBar;
 	Button btnSave;
 	Button btnDelete;
 
@@ -52,6 +54,7 @@ public class EditProductActivity extends Activity {
 	private static final String TAG_NAME = "name";
 	private static final String TAG_PRICE = "price";
 	private static final String TAG_DESCRIPTION = "description";
+	private static final String TAG_RATING = "rating";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -149,11 +152,14 @@ public class EditProductActivity extends Activity {
 							txtName = (EditText) findViewById(R.id.inputName);
 							txtPrice = (EditText) findViewById(R.id.inputPrice);
 							txtDesc = (EditText) findViewById(R.id.inputDesc);
+							ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 
 							// display product data in EditText
 							txtName.setText(product.getString(TAG_NAME));
 							txtPrice.setText(product.getString(TAG_PRICE));
 							txtDesc.setText(product.getString(TAG_DESCRIPTION));
+							ratingBar.setRating(Float.parseFloat(product.getString(TAG_RATING))/20.0f);
+
 
 						}else{
 							// product with pid not found
@@ -204,6 +210,7 @@ public class EditProductActivity extends Activity {
 			String name = txtName.getText().toString();
 			String price = txtPrice.getText().toString();
 			String description = txtDesc.getText().toString();
+			String rating = Float.toString(ratingBar.getRating() * 20.0f);
 
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -211,6 +218,7 @@ public class EditProductActivity extends Activity {
 			params.add(new BasicNameValuePair(TAG_NAME, name));
 			params.add(new BasicNameValuePair(TAG_PRICE, price));
 			params.add(new BasicNameValuePair(TAG_DESCRIPTION, description));
+			params.add(new BasicNameValuePair(TAG_RATING, rating));
 
 			// sending modified data through http request
 			// Notice that update product url accepts POST method

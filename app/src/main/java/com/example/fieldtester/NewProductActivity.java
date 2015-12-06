@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 
 public class NewProductActivity extends Activity {
 
@@ -27,6 +28,8 @@ public class NewProductActivity extends Activity {
 	EditText inputName;
 	EditText inputPrice;
 	EditText inputDesc;
+	RatingBar ratingBar;
+
 
 	// url to create new product
 	private static String url_create_product = "http://chill1203.synology.me/android_connect/create_product.php";
@@ -43,6 +46,8 @@ public class NewProductActivity extends Activity {
 		inputName = (EditText) findViewById(R.id.inputName);
 		inputPrice = (EditText) findViewById(R.id.inputPrice);
 		inputDesc = (EditText) findViewById(R.id.inputDesc);
+		ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+
 
 		// Create button
 		Button btnCreateProduct = (Button) findViewById(R.id.btnCreateProduct);
@@ -83,12 +88,16 @@ public class NewProductActivity extends Activity {
 			String name = inputName.getText().toString();
 			String price = inputPrice.getText().toString();
 			String description = inputDesc.getText().toString();
+            String rating = Float.toString(ratingBar.getRating()*20.0f);
+
 
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("name", name));
 			params.add(new BasicNameValuePair("price", price));
 			params.add(new BasicNameValuePair("description", description));
+            params.add(new BasicNameValuePair("rating", rating));
+
 
 			// getting JSON Object
 			// Note that create product url accepts POST method

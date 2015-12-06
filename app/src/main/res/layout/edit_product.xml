@@ -56,7 +56,13 @@
 	    android:layout_marginBottom="15dip"
 	    android:lines="4"
 	    android:gravity="top"/>
-	
+
+	<RatingBar
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/ratingBar"
+		android:layout_gravity="center_horizontal" />
+
 	<LinearLayout android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:orientation="horizontal">
