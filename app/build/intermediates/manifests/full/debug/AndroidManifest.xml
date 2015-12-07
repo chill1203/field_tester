@@ -25,6 +25,18 @@
             </intent-filter>
         </activity>
 
+        <!-- All Article Activity -->
+        <activity
+            android:name="com.example.fieldtester.AllArticlesActivity"
+            android:label="Articles" >
+        </activity>
+
+        <!-- View Article Activity -->
+        <activity
+            android:name="com.example.fieldtester.ViewArticleActivity"
+            android:label="Articles" >
+        </activity>
+
         <!-- All Product Activity -->
         <activity
             android:name="com.example.fieldtester.AllProductsActivity"

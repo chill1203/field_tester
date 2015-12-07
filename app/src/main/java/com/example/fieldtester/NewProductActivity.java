@@ -15,9 +15,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 
 public class NewProductActivity extends Activity {
 
@@ -26,10 +28,11 @@ public class NewProductActivity extends Activity {
 
 	JSONParser jsonParser = new JSONParser();
 	EditText inputName;
-	EditText inputPrice;
 	EditText inputDesc;
 	RatingBar ratingBar;
+    Spinner sp;
 
+	ArrayList<String> spinnerArray;
 
 	// url to create new product
 	private static String url_create_product = "http://chill1203.synology.me/android_connect/create_product.php";
@@ -42,9 +45,23 @@ public class NewProductActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_product);
 
+		//spinnerArray insertion
+		spinnerArray = new ArrayList<String>();
+		spinnerArray.add("Computer");
+		spinnerArray.add("Tablet");
+		spinnerArray.add("Phone");
+
+        //spinner array
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_dropdown_item, spinnerArray);
+
+        sp = (Spinner) this.findViewById(R.id.spinner);
+		sp.setPrompt("Category");
+		sp.setAdapter(adapter);
+
+
 		// Edit Text
 		inputName = (EditText) findViewById(R.id.inputName);
-		inputPrice = (EditText) findViewById(R.id.inputPrice);
 		inputDesc = (EditText) findViewById(R.id.inputDesc);
 		ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 
@@ -86,15 +103,15 @@ public class NewProductActivity extends Activity {
 		 * */
 		protected String doInBackground(String... args) {
 			String name = inputName.getText().toString();
-			String price = inputPrice.getText().toString();
-			String description = inputDesc.getText().toString();
+            String category = sp.getSelectedItem().toString();
+            String description = inputDesc.getText().toString();
             String rating = Float.toString(ratingBar.getRating()*20.0f);
 
 
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("name", name));
-			params.add(new BasicNameValuePair("price", price));
+            params.add(new BasicNameValuePair("category", category));
 			params.add(new BasicNameValuePair("description", description));
             params.add(new BasicNameValuePair("rating", rating));
 

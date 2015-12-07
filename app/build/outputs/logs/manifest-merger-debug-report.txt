@@ -46,25 +46,37 @@ category#android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:21:17
 	android:name
 		ADDED from AndroidManifest.xml:21:27
-activity#com.example.fieldtester.AllProductsActivity
+activity#com.example.fieldtester.AllArticlesActivity
 ADDED from AndroidManifest.xml:26:9
 	android:label
 		ADDED from AndroidManifest.xml:28:13
 	android:name
 		ADDED from AndroidManifest.xml:27:13
-activity#com.example.fieldtester.NewProductActivity
-ADDED from AndroidManifest.xml:32:9
+activity#com.example.fieldtester.ViewArticleActivity
+ADDED from AndroidManifest.xml:33:9
 	android:label
+		ADDED from AndroidManifest.xml:35:13
+	android:name
 		ADDED from AndroidManifest.xml:34:13
-	android:name
-		ADDED from AndroidManifest.xml:33:13
-activity#com.example.fieldtester.EditProductActivity
-ADDED from AndroidManifest.xml:38:9
+activity#com.example.fieldtester.AllProductsActivity
+ADDED from AndroidManifest.xml:40:9
 	android:label
-		ADDED from AndroidManifest.xml:40:13
+		ADDED from AndroidManifest.xml:42:13
 	android:name
-		ADDED from AndroidManifest.xml:39:13
+		ADDED from AndroidManifest.xml:41:13
+activity#com.example.fieldtester.NewProductActivity
+ADDED from AndroidManifest.xml:46:9
+	android:label
+		ADDED from AndroidManifest.xml:48:13
+	android:name
+		ADDED from AndroidManifest.xml:47:13
+activity#com.example.fieldtester.EditProductActivity
+ADDED from AndroidManifest.xml:52:9
+	android:label
+		ADDED from AndroidManifest.xml:54:13
+	android:name
+		ADDED from AndroidManifest.xml:53:13
 uses-permission#android.permission.INTERNET
-ADDED from AndroidManifest.xml:45:5
+ADDED from AndroidManifest.xml:61:5
 	android:name
-		ADDED from AndroidManifest.xml:45:22
+		ADDED from AndroidManifest.xml:61:22

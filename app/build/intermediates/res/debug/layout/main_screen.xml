@@ -157,6 +157,23 @@
 
         </LinearLayout>
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="#49b2d6"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CLICK TO VIEW ARTICLES"
+                android:id="@+id/btnViewArticles"
+                android:layout_gravity="center"
+                android:background="#49b2d6"
+                android:textColor="#ffffff"
+                android:textSize="25dp" />
+        </FrameLayout>
+
     </LinearLayout>
 
 

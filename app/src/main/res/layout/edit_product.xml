@@ -24,23 +24,21 @@
 	<!-- Price Label -->
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Price"
+        android:text="Category"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
         android:textSize="17dip"/>
     
     <!-- Input Price -->
-	<EditText android:id="@+id/inputPrice" 
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_margin="5dip"
-	    android:layout_marginBottom="15dip"
-	    android:singleLine="true"
-	    android:inputType="numberDecimal"/>
-	
+
 	<!-- Description Label -->
-    <TextView android:layout_width="fill_parent"
+	<Spinner
+		android:layout_width="fill_parent"
+		android:layout_height="64dp"
+		android:id="@+id/spinner" />
+
+	<TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Description"
         android:paddingLeft="10dip"

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:weightSum="1">
     
     <!-- Name Label -->
     <TextView android:layout_width="fill_parent"
@@ -24,22 +25,21 @@
 	<!-- Price Label -->
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Rating"
+        android:text="Category"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
-        android:textSize="17dip"/>
+        android:textSize="17dip"
+        android:singleLine="false" />
     
     <!-- Input Price -->
-	<EditText android:id="@+id/inputPrice" 
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_margin="5dip"
-	    android:layout_marginBottom="15dip"
-	    android:singleLine="true"
-	    android:inputType="numberDecimal"/>
-	
-	<!-- Description Label -->
+
+    <!-- Description Label -->
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="64dp"
+        android:id="@+id/spinner" />
+
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Description"

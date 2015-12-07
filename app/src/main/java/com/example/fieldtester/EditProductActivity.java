@@ -16,21 +16,26 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 
 public class EditProductActivity extends Activity {
 
 	EditText txtName;
-	EditText txtPrice;
 	EditText txtDesc;
 	EditText txtCreatedAt;
 	RatingBar ratingBar;
 	Button btnSave;
 	Button btnDelete;
+	Spinner sp;
 
 	String pid;
+
+
+	ArrayList<String> spinnerArray;
 
 	// Progress Dialog
 	private ProgressDialog pDialog;
@@ -52,7 +57,7 @@ public class EditProductActivity extends Activity {
 	private static final String TAG_PRODUCT = "product";
 	private static final String TAG_PID = "pid";
 	private static final String TAG_NAME = "name";
-	private static final String TAG_PRICE = "price";
+	private static final String TAG_CATEGORY = "category";
 	private static final String TAG_DESCRIPTION = "description";
 	private static final String TAG_RATING = "rating";
 
@@ -60,6 +65,21 @@ public class EditProductActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.edit_product);
+
+
+		//spinnerArray insertion
+		spinnerArray = new ArrayList<String>();
+		spinnerArray.add("Computer");
+		spinnerArray.add("Tablet");
+		spinnerArray.add("Phone");
+
+		//spinner array
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_dropdown_item, spinnerArray);
+
+		sp = (Spinner) this.findViewById(R.id.spinner);
+		sp.setPrompt("Category");
+		sp.setAdapter(adapter);
 
 		// save button
 		btnSave = (Button) findViewById(R.id.btnSave);
@@ -150,13 +170,16 @@ public class EditProductActivity extends Activity {
 							// product with this pid found
 							// Edit Text
 							txtName = (EditText) findViewById(R.id.inputName);
-							txtPrice = (EditText) findViewById(R.id.inputPrice);
 							txtDesc = (EditText) findViewById(R.id.inputDesc);
 							ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 
 							// display product data in EditText
 							txtName.setText(product.getString(TAG_NAME));
-							txtPrice.setText(product.getString(TAG_PRICE));
+							for (int i=0;i<sp.getCount();i++){
+								if (sp.getItemAtPosition(i).equals(product.getString(TAG_CATEGORY))){
+									sp.setSelection(i);
+								}
+							}
 							txtDesc.setText(product.getString(TAG_DESCRIPTION));
 							ratingBar.setRating(Float.parseFloat(product.getString(TAG_RATING))/20.0f);
 
@@ -208,7 +231,7 @@ public class EditProductActivity extends Activity {
 
 			// getting updated data from EditTexts
 			String name = txtName.getText().toString();
-			String price = txtPrice.getText().toString();
+			String category = sp.getSelectedItem().toString();
 			String description = txtDesc.getText().toString();
 			String rating = Float.toString(ratingBar.getRating() * 20.0f);
 
@@ -216,7 +239,7 @@ public class EditProductActivity extends Activity {
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair(TAG_PID, pid));
 			params.add(new BasicNameValuePair(TAG_NAME, name));
-			params.add(new BasicNameValuePair(TAG_PRICE, price));
+			params.add(new BasicNameValuePair(TAG_CATEGORY, category));
 			params.add(new BasicNameValuePair(TAG_DESCRIPTION, description));
 			params.add(new BasicNameValuePair(TAG_RATING, rating));
 
