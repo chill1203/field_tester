@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="8" />
+        android:targetSdkVersion="23" />
 
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -53,6 +53,10 @@
         <activity
             android:name="com.example.fieldtester.EditProductActivity"
             android:label="Edit Product" >
+        </activity>
+        <activity
+            android:name="com.example.fieldtester.MyList"
+            android:label="My List" >
         </activity>
     </application>
 

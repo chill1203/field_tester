@@ -4,7 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="8" />
+    <uses-sdk android:minSdkVersion="8"/>
 
     <application
         android:configChanges="keyboardHidden|orientation"
@@ -21,6 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
 
         <!-- All Article Activity -->
         <activity
@@ -52,6 +55,11 @@
         <activity
             android:name="com.example.fieldtester.EditProductActivity"
             android:label="Edit Product" >
+        </activity>
+
+        <activity
+            android:name="com.example.fieldtester.MyList"
+            android:label="My List" >
         </activity>
 
 

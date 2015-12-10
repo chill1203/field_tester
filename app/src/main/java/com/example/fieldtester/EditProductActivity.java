@@ -34,6 +34,16 @@ public class EditProductActivity extends Activity {
 
 	String pid;
 
+	String name;
+	String category;
+	String description;
+	String rating;
+
+	String tempName;
+	String tempCategory;
+	String tempDescription;
+	float tempRating;
+
 
 	ArrayList<String> spinnerArray;
 
@@ -44,7 +54,7 @@ public class EditProductActivity extends Activity {
 	JSONParser jsonParser = new JSONParser();
 
 	// single product url
-	private static final String url_product_detials = "http://chill1203.synology.me/android_connect/get_product_details.php";
+	private static final String url_product_details = "http://chill1203.synology.me/android_connect/get_product_details.php";
 
 	// url to update product
 	private static final String url_update_product = "http://chill1203.synology.me/android_connect/update_product.php";
@@ -72,6 +82,9 @@ public class EditProductActivity extends Activity {
 		spinnerArray.add("Computer");
 		spinnerArray.add("Tablet");
 		spinnerArray.add("Phone");
+		spinnerArray.add("PSU");
+		spinnerArray.add("Monitor");
+		spinnerArray.add("Keyboard");
 
 		//spinner array
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -84,6 +97,11 @@ public class EditProductActivity extends Activity {
 		// save button
 		btnSave = (Button) findViewById(R.id.btnSave);
 		btnDelete = (Button) findViewById(R.id.btnDelete);
+
+		// Edit Text
+		txtName = (EditText) findViewById(R.id.inputName);
+		txtDesc = (EditText) findViewById(R.id.inputDesc);
+		ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 
 		// getting product details from intent
 		Intent i = getIntent();
@@ -132,6 +150,8 @@ public class EditProductActivity extends Activity {
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.show();
+
+
 		}
 
 		/**
@@ -140,48 +160,38 @@ public class EditProductActivity extends Activity {
 		protected String doInBackground(String... params) {
 
 			// updating UI from Background Thread
-			runOnUiThread(new Runnable() {
-				public void run() {
-					// Check for success tag
+
 					int success;
 					try {
 						// Building Parameters
-						List<NameValuePair> params = new ArrayList<NameValuePair>();
-						params.add(new BasicNameValuePair("pid", pid));
+						List<NameValuePair> params1 = new ArrayList<NameValuePair>();
+						params1.add(new BasicNameValuePair("pid", pid));
 
 						// getting product details by making HTTP request
 						// Note that product details url will use GET request
 						JSONObject json = jsonParser.makeHttpRequest(
-								url_product_detials, "GET", params);
+								url_product_details, "GET", params1);
 
 						// check your log for json response
 						Log.d("Single Product Details", json.toString());
-						
+
 						// json success tag
 						success = json.getInt(TAG_SUCCESS);
 						if (success == 1) {
 							// successfully received product details
 							JSONArray productObj = json
 									.getJSONArray(TAG_PRODUCT); // JSON Array
-							
+
 							// get first product object from JSON Array
 							JSONObject product = productObj.getJSONObject(0);
 
 							// product with this pid found
-							// Edit Text
-							txtName = (EditText) findViewById(R.id.inputName);
-							txtDesc = (EditText) findViewById(R.id.inputDesc);
-							ratingBar = (RatingBar) findViewById(R.id.ratingBar);
 
 							// display product data in EditText
-							txtName.setText(product.getString(TAG_NAME));
-							for (int i=0;i<sp.getCount();i++){
-								if (sp.getItemAtPosition(i).equals(product.getString(TAG_CATEGORY))){
-									sp.setSelection(i);
-								}
-							}
-							txtDesc.setText(product.getString(TAG_DESCRIPTION));
-							ratingBar.setRating(Float.parseFloat(product.getString(TAG_RATING))/20.0f);
+							tempName = product.getString(TAG_NAME);
+							tempCategory = product.getString(TAG_CATEGORY);
+							tempDescription = product.getString(TAG_DESCRIPTION);
+							tempRating = Float.parseFloat(product.getString(TAG_RATING)) / 20.0f;
 
 
 						}else{
@@ -190,8 +200,7 @@ public class EditProductActivity extends Activity {
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
-				}
-			});
+
 
 			return null;
 		}
@@ -201,6 +210,16 @@ public class EditProductActivity extends Activity {
 		 * After completing background task Dismiss the progress dialog
 		 * **/
 		protected void onPostExecute(String file_url) {
+
+			txtName.setText(tempName);
+			for (int i=0;i<sp.getCount();i++){
+				if (sp.getItemAtPosition(i).equals(tempCategory)){
+					sp.setSelection(i);
+				}
+			}
+			txtDesc.setText(tempDescription);
+			ratingBar.setRating(tempRating);
+
 			// dismiss the dialog once got all details
 			pDialog.dismiss();
 		}
@@ -222,6 +241,12 @@ public class EditProductActivity extends Activity {
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.show();
+
+			// getting updated data from EditTexts
+			name = txtName.getText().toString();
+			category = sp.getSelectedItem().toString();
+			description = txtDesc.getText().toString();
+			rating = Float.toString(ratingBar.getRating() * 20.0f);
 		}
 
 		/**
@@ -229,11 +254,7 @@ public class EditProductActivity extends Activity {
 		 * */
 		protected String doInBackground(String... args) {
 
-			// getting updated data from EditTexts
-			String name = txtName.getText().toString();
-			String category = sp.getSelectedItem().toString();
-			String description = txtDesc.getText().toString();
-			String rating = Float.toString(ratingBar.getRating() * 20.0f);
+
 
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();

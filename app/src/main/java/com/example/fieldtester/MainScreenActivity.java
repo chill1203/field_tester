@@ -13,6 +13,7 @@ public class MainScreenActivity extends Activity{
 	ImageButton btnViewProducts;
 	ImageButton btnNewProduct;
 	Button btnViewArticles;
+	ImageButton btnMyList;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class MainScreenActivity extends Activity{
 		btnViewProducts = (ImageButton) findViewById(R.id.btnViewProducts);
 		btnNewProduct = (ImageButton) findViewById(R.id.btnCreateProduct);
 		btnViewArticles = (Button) findViewById(R.id.btnViewArticles);
+		btnMyList = (ImageButton) findViewById(R.id.mylistIcon);
 		
 		// view products click event
 		btnViewArticles.setOnClickListener(new View.OnClickListener() {
@@ -58,5 +60,17 @@ public class MainScreenActivity extends Activity{
 				
 			}
 		});
+
+		/*
+		btnMyList.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				// Launching create new product activity
+				Intent i = new Intent(getApplicationContext(), MyList.class);
+				startActivity(i);
+
+			}
+		});*/
 	}
 }

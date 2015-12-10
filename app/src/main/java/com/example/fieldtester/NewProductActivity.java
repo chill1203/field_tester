@@ -32,6 +32,11 @@ public class NewProductActivity extends Activity {
 	RatingBar ratingBar;
     Spinner sp;
 
+	String name;
+	String category;
+	String description;
+	String rating;
+
 	ArrayList<String> spinnerArray;
 
 	// url to create new product
@@ -50,6 +55,9 @@ public class NewProductActivity extends Activity {
 		spinnerArray.add("Computer");
 		spinnerArray.add("Tablet");
 		spinnerArray.add("Phone");
+		spinnerArray.add("PSU");
+		spinnerArray.add("Monitor");
+		spinnerArray.add("Keyboard");
 
         //spinner array
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -96,17 +104,17 @@ public class NewProductActivity extends Activity {
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
 			pDialog.show();
+
+			name = inputName.getText().toString();
+			category = sp.getSelectedItem().toString();
+			description = inputDesc.getText().toString();
+			rating = Float.toString(ratingBar.getRating()*20.0f);
 		}
 
 		/**
 		 * Creating product
 		 * */
 		protected String doInBackground(String... args) {
-			String name = inputName.getText().toString();
-            String category = sp.getSelectedItem().toString();
-            String description = inputDesc.getText().toString();
-            String rating = Float.toString(ratingBar.getRating()*20.0f);
-
 
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();

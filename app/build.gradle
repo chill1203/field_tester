@@ -1,13 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 8
+
+    useLibrary 'org.apache.http.legacy'
+    compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
     defaultConfig {
         applicationId "com.example.fieldtester"
         minSdkVersion 8
-        targetSdkVersion 8
+        targetSdkVersion 23
     }
 
     buildTypes {
@@ -16,4 +18,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+}
+
+dependencies {
+    provided 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
+    compile "com.android.support:appcompat-v7:23.0.+"
+
 }
